@@ -1,2 +1,2 @@
-# Todo
-todo app in java
+# Expense Tracker
+Expnse tracker app in java
