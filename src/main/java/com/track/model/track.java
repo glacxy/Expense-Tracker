@@ -3,18 +3,29 @@ package com.track.model;
 import java.time.LocalDate;
 
 public class track {
-        private LocalDate date;
-        private   double income;
-        private double expense;
-        private String description;
-        private double balance;
+    private LocalDate date;
+    private double income;
+    private double expense;
+    private String description;
 
-    public track(LocalDate date, double income, double expense, String description, double balance) {
+    private int id;
+
+    public track(LocalDate date, double income, double expense, String description, int id) {
         this.date = date;
         this.income = income;
         this.expense = expense;
         this.description = description;
-        this.balance = balance;
+
+        this.id = id;
+
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public LocalDate getDate() {
@@ -48,15 +59,5 @@ public class track {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-   
-
 
 }
