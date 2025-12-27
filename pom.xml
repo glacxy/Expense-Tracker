@@ -14,28 +14,26 @@
     <description>A simple Expense Tracker project using Java, Swing, and MySQL</description>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <!-- Use release instead of source/target for JDK 11 -->
+        <maven.compiler.release>11</maven.compiler.release>
     </properties>
 
     <dependencies>
-        <!-- MySQL Connector -->
+        <!-- MySQL Connector updated to correct Maven coordinates -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
             <version>8.0.33</version>
         </dependency>
 
-        <!-- JDBC API (already included in JDK, optional) -->
+        <!-- Apache Commons DBCP for connection pooling -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-dbcp2</artifactId>
             <version>2.9.0</version>
         </dependency>
 
-        <!-- For GUI (Swing is part of JDK, so optional) -->
-
-        <!-- Logging (optional) -->
+        <!-- SLF4J Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -50,18 +48,17 @@
 
     <build>
         <plugins>
-            <!-- Compiler plugin -->
+            <!-- Compiler plugin not needed separately if using release, but safe to include -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <release>11</release>
                 </configuration>
             </plugin>
 
-            <!-- Shade plugin to build a fat jar -->
+            <!-- Shade plugin to build fat jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -75,12 +72,22 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.track.gui.Main</mainClass>
+                                    <!-- Make sure this matches your main class -->
+                                    <mainClass>com.track.gui.TrackGUI</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <!-- Exec plugin to allow `mvn exec:java` to run the application -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <mainClass>com.track.Main</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>
