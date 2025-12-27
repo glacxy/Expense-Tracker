@@ -2,22 +2,19 @@ package com.track.model;
 
 import java.time.LocalDate;
 
-public class track {
+public class Track {
     private LocalDate date;
     private double income;
     private double expense;
     private String description;
-
     private int id;
 
-    public track(LocalDate date, double income, double expense, String description, int id) {
+    public Track(LocalDate date, double income, double expense, String description, int id) {
         this.date = date;
         this.income = income;
         this.expense = expense;
         this.description = description;
-
         this.id = id;
-
     }
 
     public int getId() {
@@ -60,4 +57,8 @@ public class track {
         this.description = description;
     }
 
+    // <-- Add this method to fix balance error -->
+    public double getBalance() {
+        return income - expense;
+    }
 }
